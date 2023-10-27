@@ -46,10 +46,10 @@ for (let i = 0; i < pricesData?.length; i++) {
   // You can process the data to populate open, close, high, and low arrays
   // For example, you can set open and close to the same price, and high and low to the same price
   candlestickData.x.push(new Date(timestamp*1000))
-  candlestickData.open.push(price-1);
-  candlestickData.close.push(price+1);
-  candlestickData.high.push(price+0.23);
-  candlestickData.low.push(price-0.55);
+  candlestickData.open.push(price);
+  candlestickData.close.push(price);
+  candlestickData.high.push(price);
+  candlestickData.low.push(price);
 }
 
   console.log(candlestickData);
