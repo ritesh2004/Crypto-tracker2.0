@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Montserrat:wght@200;400;500;800&family=Oxygen:wght@400;700&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+.symbol{
+    font-family: Oxygen;
+    font-weight: bold;
+    font-size: larger;
+}
+.name{
+    font-family: Oxygen;
+    color: rgba(0, 0, 0, 0.5);
+}
+.price{
+    font-family: Oxygen;
+    font-family: bold;
+    font-size: larger;
+}
+.percent{
+    font-family: Oxygen;
+}
