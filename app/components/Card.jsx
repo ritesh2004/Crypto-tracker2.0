@@ -13,7 +13,7 @@ function Card(props) {
     const [historicalData, setData] = useState([]);
     const [singleCoin, setSingle] = useState();
 
-    const colorArr = ['gold','#5470DE','#47DFCF','#93D7FD']
+    const colorArr = ['gold','#5470DE','#47DFCF','#93D7FD','blueviolet','#480ca8','#90dbf4']
 
     const fetchData = async () => {
         const res1 = await fetch(HistoricalChart(props?.id, 365, "INR"))

@@ -7,13 +7,22 @@ function Cards() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const resp = await fetch(CoinList("USD"));
-            const data = await resp.json();
-            setArr(data);
+            try {    
+                const resp = await fetch(CoinList("USD"));
+                if (resp.ok) {
+                    const data = await resp.json();
+                    setArr(data);
+                }else{
+                    alert("Failed to fetch data from CoinGecko API")
+                }
+            } catch (error) {
+                alert("Error while fetching data",error)
+            }
         }
 
         return () => fetchData()
     }, [])
+    console.log(coinArr)
     return (
         <div className='flex flex-col m-3 items-center align-item'>
             <div className='w-full flex justify-end'>
@@ -23,11 +32,12 @@ function Cards() {
             </div>
             <div className='flex flex-wrap gap-5 md:gap-3'>
             {
-                coinArr?.slice(0, 4).map((coin) => {
+                coinArr && coinArr.length>0 ?
+                coinArr.filter((coin,id)=>{return(id<4)}).map((coin) => {
                     return (
                         <Card id={coin?.id} />
                     )
-                })
+                }) : <span>Loading...</span>
             }
             </div>
         </div>

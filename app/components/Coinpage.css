@@ -1,0 +1,26 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Montserrat:wght@200;400;500;800&family=Oxygen:wght@400;700&display=swap');
+
+.hlspan{
+    font-family: Oxygen;
+    font-weight: 300;
+}
+.hlval{
+    color: black;
+    font-family: Oxygen;
+    font-weight: 400;
+}
+#priceID{
+    color: black;
+    font-family: Oxygen;
+    font-weight: 400;
+    font-size: 1.125rem;
+}
+.coinName{
+    color: black;
+    font-family: Oxygen;
+    font-size: 1.125rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
