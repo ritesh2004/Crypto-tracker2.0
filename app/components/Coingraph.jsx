@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import { Ohlc } from "../Config/Apis";
 // import { data } from "autoprefixer";
+import './Coingraph.css'
 
 
 function Coingraph() {
@@ -12,7 +13,7 @@ function Coingraph() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res1 = await fetch(Ohlc("bitcoin","USD","14"));
+        const res1 = await fetch(Ohlc("bitcoin", "USD", "14"));
         console.log(res1)
         if (res1.ok) {
           const data1 = await res1.json();
@@ -29,7 +30,7 @@ function Coingraph() {
 
     getData();
   }, []);
-console.log(priceData)
+  console.log(priceData)
   useEffect(() => {
     if (priceData && priceData.length > 0) {
       const candlestickData = {
@@ -77,15 +78,17 @@ console.log(priceData)
     }
   };
 
-  
+
   return (
-      <div id="myDIV">
-        {candlestickData.x && candlestickData.x.length > 0 ? (
-          <Plot data={[candlestickData]} layout={layout} />
-        ) : (
-          <p>Loading data...</p>
-        )}
-      </div>
+    <div className="myDIV flex justify-center items-center w-[90%]">
+      {candlestickData.x && candlestickData.x.length > 0 ? (
+        <figure className="plt">
+          <Plot className="w-full h-full" data={[candlestickData]} layout={layout} />
+        </figure>
+      ) : (
+        <p>Loading data...</p>
+      )}
+    </div>
   );
 }
 

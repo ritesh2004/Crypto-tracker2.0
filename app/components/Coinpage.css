@@ -24,3 +24,7 @@
     font-weight: 400;
     text-transform: uppercase;
 }
+
+.newsDiv::-webkit-scrollbar{
+    display: none;
+}

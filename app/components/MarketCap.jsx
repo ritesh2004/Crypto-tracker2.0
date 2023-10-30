@@ -29,7 +29,7 @@ function MarketCap() {
 
     return (
         <div class="relative overflow-x-auto rounded-lg">
-            <table class="text-sm text-left text-gray-500 rounded">
+            <table class="text-sm text-left text-gray-500 rounded md:w-full xl:w-full">
                 <thead class=" text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3" style={{fontFamily:'Oxygen',fontSize:'1rem'}}>

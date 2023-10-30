@@ -1,0 +1,7 @@
+.myDIV{
+    overflow-x: scroll;
+}
+
+.myDIV::-webkit-scrollbar{
+    display: none;
+}

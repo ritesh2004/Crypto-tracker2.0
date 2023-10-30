@@ -1,45 +1,74 @@
 import React, { useEffect, useState } from 'react';
 import { CoinList } from '../Config/Apis';
 import Card from './Card';
+import AliceCarousel from 'react-alice-carousel';
+import "react-alice-carousel/lib/alice-carousel.css";
 
 function Cards() {
     const [coinArr, setArr] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            try {    
+            try {
                 const resp = await fetch(CoinList("USD"));
                 if (resp.ok) {
                     const data = await resp.json();
                     setArr(data);
-                }else{
+                } else {
                     alert("Failed to fetch data from CoinGecko API")
                 }
             } catch (error) {
-                alert("Error while fetching data",error)
+                alert("Error while fetching data", error)
             }
         }
 
         return () => fetchData()
     }, [])
-    console.log(coinArr)
-    return (
-        <div className='flex flex-col m-3 items-center align-item'>
-            <div className='w-full flex justify-end'>
-                <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"><i class="bi bi-chevron-left"></i></button>
 
-                <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"><i class="bi bi-chevron-right"></i></button>
-            </div>
-            <div className='flex flex-wrap gap-5 md:gap-3'>
-            {
-                coinArr && coinArr.length>0 ?
-                coinArr.filter((coin,id)=>{return(id<4)}).map((coin) => {
-                    return (
-                        <Card id={coin?.id} />
-                    )
-                }) : <span>Loading...</span>
-            }
-            </div>
+    const items = coinArr?.filter((coin,id)=>(id<=5)).map((coin) => {
+        return (
+            <Card id={coin?.id} />
+        )
+    })
+    // console.log(coinArr)
+    let responsive = {
+        0: {
+            items: 1,
+            itemsFit:'fill'
+        },
+        320: {
+            items: 1
+        },
+        524: {
+            items: 1,
+            itemsFit: 'contain'
+        },
+        768:{
+            items:2,
+            itemsFit:'fill'
+        },
+        1024: {
+            items: 3,
+            itemsFit: 'contain',
+        },
+        1400: {
+            items: 4,
+            itemsFit: 'contain',
+        }
+    }
+    return (
+        <div className='items-center w-[93%]'>
+            <AliceCarousel
+                mouseTracking
+                autoPlay
+                autoPlayInterval={1000}
+                animationDuration={1500}
+                responsive={responsive}
+                items={items}
+                infinite
+                disableButtonsControls
+                disableDotsControls
+            />
         </div>
     )
 }

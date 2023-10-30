@@ -45,6 +45,7 @@ function Card(props) {
                 </div>
             </div>
             <Line
+            style={{height:'80px'}}
                 data={{
                     labels: historicalData?.map((coin) => {
                         const date = new Date(coin[0]);
