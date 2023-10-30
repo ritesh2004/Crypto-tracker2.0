@@ -65,11 +65,11 @@ function Coinpage() {
                     <MarketCap />
                 </div>
             </div>
-            <div className='flex flex-col gap-10 w-full xl:flex-row xl:justify-between md:flex-col md:gap-5'>
-            <div className='w-full xl:w-[45%] xl:h-[350px] md:w-full'>
+            <div className='flex flex-col gap-10 w-full xl:flex-row xl:justify-between md:flex-row md:justify-between'>
+            <div className='w-full xl:w-[45%] xl:h-[350px] md:w-[45%] md:h-[400px]'>
                 <CoinDetails/>
             </div>
-            <div className='w-full h-[400px] overflow-scroll rounded-lg shadow-lg newsDiv flex flex-col items-center xl:w-[48%] xl:h-[350px] md:w-full md:h-[400px]'>
+            <div className='w-full h-[400px] overflow-scroll rounded-lg shadow-lg newsDiv flex flex-col items-center xl:w-[48%] xl:h-[350px] md:w-[45%] md:h-[400px]'>
                 <Newsfeed/>
             </div>
             </div>
