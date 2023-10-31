@@ -28,3 +28,6 @@
 .newsDiv::-webkit-scrollbar{
     display: none;
 }
+.coindet::-webkit-scrollbar{
+    display: none;
+}

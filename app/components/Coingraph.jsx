@@ -6,14 +6,14 @@ import { Ohlc } from "../Config/Apis";
 import './Coingraph.css'
 
 
-function Coingraph() {
+function Coingraph(props) {
   const [priceData, setData] = useState([]);
   const [candlestickData, setCandlestickData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res1 = await fetch(Ohlc("bitcoin", "USD", "14"));
+        const res1 = await fetch(Ohlc((props?.id?props.id:"bitcoin"), "USD", "14"));
         console.log(res1)
         if (res1.ok) {
           const data1 = await res1.json();
@@ -29,7 +29,7 @@ function Coingraph() {
     };
 
     getData();
-  }, []);
+  }, [props]);
   console.log(priceData)
   useEffect(() => {
     if (priceData && priceData.length > 0) {
@@ -49,7 +49,7 @@ function Coingraph() {
 
       setCandlestickData(candlestickData);
     }
-  }, [priceData]);
+  }, [priceData,props]);
 
   let layout = {
     dragmode: 'zoom',

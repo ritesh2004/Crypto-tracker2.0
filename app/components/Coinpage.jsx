@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Coingraph from './Coingraph';
 import MarketCap from './MarketCap';
 import { SingleCoin } from '../Config/Apis';
@@ -6,16 +6,21 @@ import Image from 'next/image';
 import './Coinpage.css';
 import CoinDetails from './CoinDetails';
 import Newsfeed from './Newsfeed';
+import Appcontext from '../Context/Appcontext';
 
 
-function Coinpage() {
+function Coinpage(props) {
     const [coin, setCoin] = useState();
+    const {id} = props;
+    console.log("Outside UseEffect",props)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(SingleCoin("bitcoin"))
+                console.log("Inside UseEffect",id)
+                const res = await fetch(SingleCoin(id?id:"bitcoin"))
                 if (res.ok) {
                     const data = await res.json()
+                    console.log(data)
                     setCoin(data)
                 } else {
                     console.log("Falied to fetch data from CoinGecko API")
@@ -25,8 +30,8 @@ function Coinpage() {
             }
         }
 
-        return () => fetchData()
-    }, [])
+        fetchData()
+    }, [id])
     console.log(coin)
     return (
         <div className='flex flex-col w-[93%] gap-10'>
@@ -59,15 +64,15 @@ function Coinpage() {
                             <span className='text-black-900 hlval'>{coin.market_data.total_volume['usd']} </span>USD
                         </span>
                     </div> : <span>Loading...</span>}
-                    <Coingraph />
+                    <Coingraph id={props?.id?props.id:"bitcoin"}/>
                 </div>
                 <div className='bg-white p-2 rounded-lg shadow-lg'>
                     <MarketCap />
                 </div>
             </div>
             <div className='flex flex-col gap-10 w-full xl:flex-row xl:justify-between md:flex-row md:justify-between'>
-            <div className='w-full xl:w-[45%] xl:h-[350px] md:w-[45%] md:h-[400px]'>
-                <CoinDetails/>
+            <div className='w-full overflow-scroll shadow-lg rounded-lg bg-white xl:w-[45%] xl:h-[350px] md:w-[45%] md:h-[400px] coindet'>
+                <CoinDetails id={props?.id?props.id:"bitcoin"}/>
             </div>
             <div className='w-full h-[400px] overflow-scroll rounded-lg shadow-lg newsDiv flex flex-col items-center xl:w-[48%] xl:h-[350px] md:w-[45%] md:h-[400px]'>
                 <Newsfeed/>

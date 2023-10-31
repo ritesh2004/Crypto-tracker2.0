@@ -13,6 +13,10 @@ const nextConfig = {
             {
                 protocol:'https',
                 hostname:'resources.cryptocompare.com'
+            },
+            {
+                protocol:'https',
+                hostname:'s3-alpha-sig.figma.com'
             }
         ]
     }

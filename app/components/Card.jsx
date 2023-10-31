@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
 import { HistoricalChart, SingleCoin } from '../Config/Apis';
 import Image from 'next/image';
 import './Cards.css'
+import Appcontext from '../Context/Appcontext';
 
 Chart.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
 
@@ -13,6 +14,7 @@ function Card(props) {
     const [historicalData, setData] = useState([]);
     const [singleCoin, setSingle] = useState();
 
+    const {id,setId} = useContext(Appcontext);
     const colorArr = ['gold','#5470DE','#47DFCF','#93D7FD','blueviolet','#480ca8','#90dbf4']
 
     const fetchData = async () => {
@@ -28,11 +30,11 @@ function Card(props) {
         fetchData()
     }, [])
     return (
-        <div className='flex items-center align-item flex-col w-[18.875rem] h-[9.875rem] bg-white rounded-lg shadow-lg m-5 p-3'>
+        <div className='flex items-center align-item flex-col w-[18.875rem] h-[9.875rem] bg-white rounded-lg shadow-lg m-5 p-3 hover:bg-[#e5e5e5] hover:cursor-pointer' onClick={()=>setId(singleCoin?.id)}>
             <div className='w-full flex flex-row justify-between'>
                 <div className='flex flex-row items-center gap-2'>
                     <div>
-                        <Image src={singleCoin?.image?.thumb} height={30} width={30} alt='btc' />
+                        <Image src={singleCoin?.image?.large} height={30} width={30} alt='btc' />
                     </div>
                     <div className='flex flex-col'>
                         <span className='symbol uppercase'>{singleCoin?.symbol}</span>

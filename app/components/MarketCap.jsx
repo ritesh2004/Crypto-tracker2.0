@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CoinList } from '../Config/Apis';
 import Image from 'next/image';
+import Appcontext from '../Context/Appcontext';
 
 function MarketCap() {
 
-    const [coinArr, setCoinArr] = useState([])
+    // const [coinArr, setCoinArr] = useState([])
+    const {setId,coinArr} = useContext(Appcontext);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(CoinList("USD"));
-                if (res.ok) {
-                    const data = await res.json();
-                    setCoinArr(data)
-                }
-                else {
-                    console.log("Failed to fetchdata from CoinGecko API")
-                }
-            } catch (error) {
-                alert("Error while fetching data", error)
-            }
-        }
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const res = await fetch(CoinList("USD"));
+    //             if (res.ok) {
+    //                 const data = await res.json();
+    //                 setCoinArr(data)
+    //             }
+    //             else {
+    //                 console.log("Failed to fetchdata from CoinGecko API")
+    //             }
+    //         } catch (error) {
+    //             alert("Error while fetching data", error)
+    //         }
+    //     }
 
-        return () => fetchData()
-    }, [])
+    //     return () => fetchData()
+    // }, [])
 
     console.log(coinArr)
 
@@ -44,7 +46,7 @@ function MarketCap() {
                     {coinArr && coinArr.length > 0 ?
                         coinArr.filter((coin,id)=>{return(id<=9)}).map((coin) => {
                             return (
-                                <tr class="bg-white border-b">
+                                <tr class="bg-white border-b hover:cursor-pointer hover:bg-[#e5e5e5]" onClick={()=>setId(coin?.id)}>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex flex-row gap-3 items-center uppercase font-bold">
                                     <Image src={coin.image} height={30} width={30} alt={coin.id}/>
                                         {coin.symbol}

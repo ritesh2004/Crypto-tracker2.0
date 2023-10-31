@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { SingleCoin } from '../Config/Apis';
 import Linkify from "linkify-react";
 
-function CoinDetails() {
+function CoinDetails(props) {
   const [coin, setCoin] = useState();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(SingleCoin('bitcoin'));
+        const res = await fetch(SingleCoin(props?.id?props.id:"bitcoin"));
         if (res.ok) {
           const data = await res.json()
           setCoin(data)
@@ -21,7 +21,7 @@ function CoinDetails() {
     }
 
     return () => fetchData()
-  }, [])
+  }, [props])
 
   const options = {
     render: {
@@ -35,7 +35,7 @@ function CoinDetails() {
     }
   }
   return (
-    <div className='bg-white w-full p-5 rounded-lg shadow-lg'>
+    <div className='bg-white w-full p-5'>
       <span className='mb-5' style={{fontFamily:'Oxygen',color:'black',fontWeight:'700',fontSize:'1.5rem'}}><i class="bi bi-square-fill" style={{color:'blueviolet'}}></i> Important Info</span>
       {coin ? <div className='flex flex-col gap-3'>
         <p className='text-gray-500' style={{fontFamily:'Oxygen',fontWeight:'300',fontSize:'1.125rem'}}>

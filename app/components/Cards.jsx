@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CoinList } from '../Config/Apis';
 import Card from './Card';
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
+import Appcontext from '../Context/Appcontext';
 
 function Cards() {
-    const [coinArr, setArr] = useState([]);
+    const {coinArr} = useContext(Appcontext);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const resp = await fetch(CoinList("USD"));
-                if (resp.ok) {
-                    const data = await resp.json();
-                    setArr(data);
-                } else {
-                    alert("Failed to fetch data from CoinGecko API")
-                }
-            } catch (error) {
-                alert("Error while fetching data", error)
-            }
-        }
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const resp = await fetch(CoinList("USD"));
+    //             if (resp.ok) {
+    //                 const data = await resp.json();
+    //                 setArr(data);
+    //             } else {
+    //                 alert("Failed to fetch data from CoinGecko API")
+    //             }
+    //         } catch (error) {
+    //             alert("Error while fetching data", error)
+    //         }
+    //     }
 
-        return () => fetchData()
-    }, [])
+    //     return () => fetchData()
+    // }, [])
 
     const items = coinArr?.filter((coin,id)=>(id<=5)).map((coin) => {
         return (
@@ -34,10 +35,11 @@ function Cards() {
     let responsive = {
         0: {
             items: 1,
-            itemsFit:'fill'
+            itemsFit:'contain'
         },
         320: {
-            items: 1
+            items: 1,
+            itemsFit:'contain'
         },
         524: {
             items: 1,
