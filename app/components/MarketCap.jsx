@@ -44,9 +44,9 @@ function MarketCap() {
                 </thead>
                 <tbody>
                     {coinArr && coinArr.length > 0 ?
-                        coinArr.filter((coin,id)=>{return(id<=9)}).map((coin) => {
+                        coinArr.filter((coin,id)=>{return(id<=9)}).map((coin,id) => {
                             return (
-                                <tr class="bg-white border-b hover:cursor-pointer hover:bg-[#e5e5e5]" onClick={()=>setId(coin?.id)}>
+                                <tr class="bg-white border-b hover:cursor-pointer hover:bg-[#e5e5e5]" onClick={()=>setId(coin?.id)} key={id}>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex flex-row gap-3 items-center uppercase font-bold">
                                     <Image src={coin.image} height={30} width={30} alt={coin.id}/>
                                         {coin.symbol}

@@ -40,7 +40,7 @@ function Newsfeed() {
           const month = monthArr[dateString.getMonth()]
           {/* console.log(dateString) */ }
           return (
-            <div className='w-[95%] h-[150px] shadow-lg rounded-lg flex flex-row bg-white overflow-hidden p-3 hover:cursor-pointer hover:bg-[#e5e5e5]' style={{ fontFamily: 'Oxygen' }} onClick={()=>route.push(feeds.guid)}>
+            <div className='w-[95%] h-[150px] shadow-lg rounded-lg flex flex-row bg-white overflow-hidden p-3 hover:cursor-pointer hover:bg-[#e5e5e5]' style={{ fontFamily: 'Oxygen' }} onClick={()=>route.push(feeds.guid)} key={id}>
               <div className='flex flex-col gap-3'>
                 <span className='text-sm' style={{ fontFamily: 'Oxygen', fontWeight: '300', color: 'black', letterSpacing: '0.01719rem' }}>{day}{month} <span className='ml-2'> {hour}:{minute}</span></span>
                 <div className='flex flex-col gap-2'>

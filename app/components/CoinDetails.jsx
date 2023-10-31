@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SingleCoin } from '../Config/Apis';
 import Linkify from "linkify-react";
+import Link from 'next/link';
 
 function CoinDetails(props) {
   const [coin, setCoin] = useState();
