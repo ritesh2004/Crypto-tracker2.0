@@ -18,8 +18,8 @@ function Card(props) {
     const colorArr = ['gold','#5470DE','#47DFCF','#93D7FD','blueviolet','#480ca8','#90dbf4']
 
     const fetchData = async () => {
-        const res1 = await fetch(HistoricalChart(props?.id, 365, "INR"))
-        const res2 = await fetch(SingleCoin(props?.id))
+        const res1 = await fetch(HistoricalChart(props.id, 365, "INR"))
+        const res2 = await fetch(SingleCoin(props.id))
         const data = await res1.json();
         const data1 = await res2.json();
         setData(data?.prices);
