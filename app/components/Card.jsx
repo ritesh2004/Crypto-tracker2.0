@@ -6,7 +6,6 @@ import './Cards.css'
 import Appcontext from '../Context/Appcontext';
 import {Singlecoin} from '../api/SingleCoin';
 import {HistoricalData} from '../api/HistoricalData';
-import Wait from './Wait';
 
 Chart.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
 
@@ -63,7 +62,7 @@ const Card = async (props) => {
                     <span className='percent' style={{color:singleCoin?.market_data?.market_cap_change_percentage_24h>0?"green":"#EE2E6B"}}>{singleCoin?.market_data?.market_cap_change_percentage_24h?.toFixed(2)}% {singleCoin?.market_data?.market_cap_change_percentage_24h>0?<i class="bi bi-arrow-up"></i>:<i class="bi bi-arrow-down"></i>}</span>
                 </div>
             </div>
-            <Line
+            {historicalData && historicalData?.length >0 ? <Line
             style={{height:'80px'}}
                 data={{
                     labels: historicalData?.map((coin) => {
@@ -92,7 +91,12 @@ const Card = async (props) => {
                         },
                     }
                 }}
-            />
+            />: 
+            <div className='w-full h-full flex justify-center items-center'>
+                <figure className='flex justify-center h-[3rem] w-[3rem] object-cover bg-cover'>
+                    <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif'/>
+                </figure>
+            </div>}
         </div>
     )
 }

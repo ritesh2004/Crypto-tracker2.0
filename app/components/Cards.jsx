@@ -3,6 +3,7 @@ import Card from './Card';
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 import Appcontext from '../Context/Appcontext';
+import Image from 'next/image';
 
 function Cards() {
     const {coinArr} = useContext(Appcontext);
@@ -41,6 +42,7 @@ function Cards() {
     }
     return (
         <div className='items-center w-[93%]'>
+            {coinArr && coinArr?.length>0 ? 
             <AliceCarousel
                 mouseTracking
                 autoPlay
@@ -51,7 +53,12 @@ function Cards() {
                 infinite
                 disableButtonsControls
                 disableDotsControls
-            />
+            />:
+            <div className='w-full h-full flex justify-center items-center'>
+                <figure className='flex justify-center h-[3rem] w-[3rem] object-cover bg-cover'>
+                    <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif'/>
+                </figure>
+            </div>}
         </div>
     )
 }

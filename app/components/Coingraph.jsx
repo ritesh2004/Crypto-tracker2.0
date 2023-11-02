@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import './Coingraph.css'
 import { Ohlc } from "../api/Ohlc";
+import Image from "next/image";
 
 const DynamicPlot = dynamic(() => import('react-plotly.js'), {
   ssr: false, // This ensures Plotly is only loaded on the client side
@@ -83,7 +84,11 @@ function Coingraph(props) {
           <DynamicPlot className="w-full h-full" data={[candlestickData]} layout={layout} />
         </figure>
       ) : (
-        <p>Loading data...</p>
+        <div className='w-full h-full flex justify-center items-center'>
+                <figure className='flex justify-center h-[5rem] w-[5rem] object-cover bg-cover'>
+                    <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif'/>
+                </figure>
+            </div>
       )}
     </div>
   );

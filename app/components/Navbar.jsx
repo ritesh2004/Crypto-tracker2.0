@@ -63,7 +63,7 @@ function Navbar() {
                         </div>
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
                             <li>
-                            <Image className="w-10 h-10 rounded-full" height={20} width={20} src="https://th.bing.com/th/id/OIP.jryuUgIHWL-1FVD2ww8oWgHaHa?pid=ImgDet&rs=1" alt="Rounded avatar"/>
+                            <Image className="w-10 h-10 rounded-full" height={20} width={20} src="/Images/avatar.jpg" alt="Rounded avatar"/>
                             </li>
                         </ul>
                     </div>
@@ -73,5 +73,5 @@ function Navbar() {
         </div>
     )
 }
-
+// https://th.bing.com/th/id/OIP.jryuUgIHWL-1FVD2ww8oWgHaHa?pid=ImgDet&rs=1
 export default Navbar

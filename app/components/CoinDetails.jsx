@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Linkify from "linkify-react";
 import Link from 'next/link';
 import {Singlecoin} from '../api/SingleCoin';
+import Image from 'next/image';
 
 function CoinDetails(props) {
   const [coin, setCoin] = useState();
@@ -20,7 +21,7 @@ function CoinDetails(props) {
 
     fetchData()
   }, [id])
-  // console.log(coin)
+  console.log(coin)
   const options = {
     render: {
       url: ({ attributes, content }) => {
@@ -49,7 +50,11 @@ function CoinDetails(props) {
         <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Sentiment Votes Down Percentage <span style={{color:'#EE2E6B'}}><i className="bi bi-arrow-down"></i>{coin.sentiment_votes_down_percentage}%</span></span>
 
         <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Coin Link <a style={{textDecoration:'none',color:'violet'}} href={coin.links.homepage[0]}>Click Here</a></span>
-      </div> : <span>Loading...</span>}
+      </div> :<div className='w-full h-full flex justify-center items-center'>
+                <figure className='flex justify-center h-[5rem] w-[5rem] object-cover bg-cover'>
+                    <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif'/>
+                </figure>
+            </div>}
     </div>
   )
 }

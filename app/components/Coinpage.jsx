@@ -5,18 +5,18 @@ import Image from 'next/image';
 import './Coinpage.css';
 import CoinDetails from './CoinDetails';
 import Newsfeed from './Newsfeed';
-import {Singlecoin} from '../api/SingleCoin';
+import { Singlecoin } from '../api/SingleCoin';
 
 
 function Coinpage(props) {
     const [coin, setCoin] = useState();
-    const {id} = props;
-    console.log("ID selected",id)
+    const { id } = props;
+    console.log("ID selected", id)
     useEffect(() => {
         const fetchData = async () => {
             try {
                 // console.log("Inside useeffect",id)
-                const data = await Singlecoin(id?id:"bitcoin")
+                const data = await Singlecoin(id ? id : "bitcoin")
                 setCoin(data)
             } catch (error) {
                 console.error("Error while fetching data: ", error)
@@ -31,7 +31,11 @@ function Coinpage(props) {
             <div className='flex xl:flex-row xl:justify-between w-full md:flex-col md:gap-10 flex-col gap-10'>
                 <div className='p-3 bg-white rounded-lg shadow-lg'>
                     <div className='bg-white flex flex-row items-center gap-5 p-5'>
-                        {coin ? <Image src={coin.image.large} height={40} width={40} /> : <span>Loading...</span>}
+                        {coin ? <Image src={coin.image.large} height={40} width={40} /> : <div className='w-full h-full flex justify-center items-center'>
+                <figure className='flex justify-center h-[2rem] w-[2rem] object-cover bg-cover'>
+                    <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif'/>
+                </figure>
+            </div>}
                         <span className='coinName'>
                             {coin && coin.id}
                         </span>
@@ -56,20 +60,24 @@ function Coinpage(props) {
                             24h Volume
                             <span className='text-black-900 hlval'>{coin.market_data.total_volume['usd']} </span>USD
                         </span>
-                    </div> : <span>Loading...</span>}
-                    <Coingraph id={props?.id}/>
+                    </div> : <div className='w-full h-full flex justify-center items-center'>
+                        <figure className='flex justify-center h-[3rem] w-[3rem] object-cover bg-cover'>
+                            <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif' />
+                        </figure>
+                    </div>}
+                    <Coingraph id={props?.id} />
                 </div>
                 <div className='bg-white p-2 rounded-lg shadow-lg'>
                     <MarketCap />
                 </div>
             </div>
             <div className='flex flex-col gap-10 w-full xl:flex-row xl:justify-between md:flex-row md:justify-between'>
-            <div className='w-full overflow-scroll shadow-lg rounded-lg bg-white xl:w-[45%] xl:h-[350px] md:w-[45%] md:h-[400px] coindet'>
-                <CoinDetails id={props?.id}/>
-            </div>
-            <div className='w-full h-[400px] overflow-scroll rounded-lg shadow-lg newsDiv flex flex-col items-center xl:w-[48%] xl:h-[350px] md:w-[45%] md:h-[400px]'>
-                <Newsfeed/>
-            </div>
+                <div className='w-full overflow-scroll shadow-lg rounded-lg bg-white xl:w-[45%] xl:h-[350px] md:w-[45%] md:h-[400px] coindet'>
+                    <CoinDetails id={props?.id} />
+                </div>
+                <div className='w-full h-[400px] overflow-scroll rounded-lg shadow-lg bg-white newsDiv flex flex-col items-center xl:w-[48%] xl:h-[350px] md:w-[45%] md:h-[400px]'>
+                    <Newsfeed />
+                </div>
             </div>
         </div>
     )

@@ -10,7 +10,7 @@ import Wait from './components/Wait'
 
 const App = async () => {
   const { id, searched } = useContext(Appcontext);
-  await Wait(3000);
+  await Wait(500);
   return (
     <div className='bg-[#F3F6FE] min-h-screen '>
       <div className='mb-3'>
