@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Linkify from "linkify-react";
 import Link from 'next/link';
-import {Singlecoin} from '../api/SingleCoin';
+import {Singlecoin} from '../api/Singlecoin';
 import Image from 'next/image';
 
 function CoinDetails(props) {

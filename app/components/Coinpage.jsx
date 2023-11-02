@@ -5,7 +5,7 @@ import Image from 'next/image';
 import './Coinpage.css';
 import CoinDetails from './CoinDetails';
 import Newsfeed from './Newsfeed';
-import { Singlecoin } from '../api/SingleCoin';
+import { Singlecoin } from '../api/Singlecoin';
 
 
 function Coinpage(props) {

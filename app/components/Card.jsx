@@ -4,7 +4,7 @@ import { Chart, LineElement, PointElement, LinearScale, Title, CategoryScale } f
 import Image from 'next/image';
 import './Cards.css'
 import Appcontext from '../Context/Appcontext';
-import {Singlecoin} from '../api/SingleCoin';
+import {Singlecoin} from '../api/Singlecoin';
 import {HistoricalData} from '../api/HistoricalData';
 
 Chart.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
