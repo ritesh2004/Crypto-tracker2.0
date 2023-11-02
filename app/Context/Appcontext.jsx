@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { CoinList } from '../Config/Apis';
+import { Coinlist } from '../api/Coinlist';
 
 const Appcontext = createContext()
 
@@ -12,19 +12,15 @@ const ContextProvider = ({children}) => {
     useEffect(()=>{
         const fetchData = async () =>{
             try {
-                const res = await fetch(CoinList("USD"));
-                if (res.ok) {
-                    const data = await res.json()
-                    setArr(data)
-                } else {
-                    console.log("Failed to fetch data from CoinGecko API")
-                }
+                const data = await Coinlist("USD");
+                console.log(data)
+                setArr(data)
             } catch (error) {
-                alert("Error while fetching the data",error)
+                console.error("Error while fetching the data: ",error)
             }
         }
 
-        return () => fetchData()
+        fetchData()
     },[])
 
     const data = {

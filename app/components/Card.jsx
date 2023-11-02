@@ -1,34 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
-import { HistoricalChart, SingleCoin } from '../Config/Apis';
 import Image from 'next/image';
 import './Cards.css'
 import Appcontext from '../Context/Appcontext';
+import {Singlecoin} from '../api/SingleCoin';
+import {HistoricalData} from '../api/HistoricalData';
+import Wait from './Wait';
 
 Chart.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
 
 
-function Card(props) {
+const Card = async (props) => {
 
-    const [historicalData, setData] = useState([]);
+    const [historicalData, setHistoricalData] = useState([]);
     const [singleCoin, setSingle] = useState();
 
     const {id,setId} = useContext(Appcontext);
     const colorArr = ['gold','#5470DE','#47DFCF','#93D7FD','blueviolet','#480ca8','#90dbf4']
 
-    const fetchData = async () => {
-        const res1 = await fetch(HistoricalChart(props.id, 365, "INR"))
-        const res2 = await fetch(SingleCoin(props.id))
-        const data = await res1.json();
-        const data1 = await res2.json();
-        setData(data?.prices);
-        setSingle(data1)
-        // console.log(data1)
+    const fetchSingleCoin = async () => {
+        try {
+            const data = await Singlecoin(props?.id)
+            return data
+        } catch (error) {
+            console.log("Error while fetching data",error)
+        }
     }
+
+    const fetchHistoricalData = async () => {
+        try {
+            const data = await HistoricalData(props?.id,"INR","365")
+            return data
+        } catch (error) {
+            console.log("Error while fetching data",error)
+        }
+    }
+
     useEffect(() => {
-        fetchData()
+        fetchHistoricalData().then(res=>{
+            setHistoricalData(res?.prices)
+        })
+        fetchSingleCoin().then(res=>{
+            setSingle(res)
+        })
     }, [])
+    // await Wait(5000)
     return (
         <div className='flex items-center align-item flex-col w-[18.875rem] h-[9.875rem] bg-white rounded-lg shadow-lg m-5 p-3 hover:bg-[#e5e5e5] hover:cursor-pointer' onClick={()=>setId(singleCoin?.id)}>
             <div className='w-full flex flex-row justify-between'>

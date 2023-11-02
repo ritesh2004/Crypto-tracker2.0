@@ -1,28 +1,25 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import Plot from "react-plotly.js";
-import { Ohlc } from "../Config/Apis";
+// import Plot from "react-plotly.js";
 // import { data } from "autoprefixer";
+import dynamic from "next/dynamic";
 import './Coingraph.css'
+import { Ohlc } from "../api/Ohlc";
 
+const DynamicPlot = dynamic(() => import('react-plotly.js'), {
+  ssr: false, // This ensures Plotly is only loaded on the client side
+});
 
 function Coingraph(props) {
   const [priceData, setData] = useState([]);
   const [candlestickData, setCandlestickData] = useState([]);
-
+  // console.log(props)
   useEffect(() => {
     const getData = async () => {
       try {
-        const res1 = await fetch(Ohlc((props?.id?props.id:"bitcoin"), "USD", "14"));
-        console.log(res1)
-        if (res1.ok) {
-          const data1 = await res1.json();
-          console.log(data1)
-          setData(data1);
-          console.log(priceData)
-        } else {
-          console.error("Failed to fetch data from CoinGecko API.");
-        }
+        const data = await Ohlc((props?.id?props.id:"bitcoin"),"USD","14")
+        setData(data)
+        // console.log(data)
       } catch (error) {
         console.error("Error while fetching data:", error);
       }
@@ -30,7 +27,7 @@ function Coingraph(props) {
 
     getData();
   }, [props]);
-  console.log(priceData)
+  // console.log(priceData)
   useEffect(() => {
     if (priceData && priceData.length > 0) {
       const candlestickData = {
@@ -83,7 +80,7 @@ function Coingraph(props) {
     <div className="myDIV flex justify-center items-center w-[90%]">
       {candlestickData.x && candlestickData.x.length > 0 ? (
         <figure className="plt">
-          <Plot className="w-full h-full" data={[candlestickData]} layout={layout} />
+          <DynamicPlot className="w-full h-full" data={[candlestickData]} layout={layout} />
         </figure>
       ) : (
         <p>Loading data...</p>

@@ -1,15 +1,14 @@
 "use client"
-import Navbar from './components/Navbar'
-import Cards from './components/Cards'
-import Coinpage from './components/Coinpage'
-import Footer from './components/Footer'
-import { ContextProvider } from './Context/Appcontext'
+import React, { useContext } from 'react'
 import App from './App'
+import { ContextProvider } from './Context/Appcontext'
 
-export default function Home() {
+function Home() {
   return (
     <ContextProvider>
-      <App/>
+      <App />
     </ContextProvider>
   )
 }
+
+export default Home

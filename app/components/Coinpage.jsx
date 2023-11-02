@@ -1,40 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Coingraph from './Coingraph';
 import MarketCap from './MarketCap';
-import { SingleCoin } from '../Config/Apis';
 import Image from 'next/image';
 import './Coinpage.css';
 import CoinDetails from './CoinDetails';
 import Newsfeed from './Newsfeed';
-import Appcontext from '../Context/Appcontext';
+import {Singlecoin} from '../api/SingleCoin';
 
 
 function Coinpage(props) {
     const [coin, setCoin] = useState();
     const {id} = props;
-    console.log("Outside UseEffect",props)
+    console.log("ID selected",id)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("Inside UseEffect",id)
-                const res = await fetch(SingleCoin(id?id:"bitcoin"))
-                if (res.ok) {
-                    const data = await res.json()
-                    console.log(data)
-                    setCoin(data)
-                } else {
-                    console.log("Falied to fetch data from CoinGecko API")
-                }
+                // console.log("Inside useeffect",id)
+                const data = await Singlecoin(id?id:"bitcoin")
+                setCoin(data)
             } catch (error) {
-                alert("Error while fetching data", error)
+                console.error("Error while fetching data: ", error)
             }
         }
 
         fetchData()
     }, [id])
-    console.log(coin)
+    // console.log(coin)
     return (
-        <div className='flex flex-col w-[93%] gap-10'>
+        <div className='flex flex-col w-[93%] gap-10 mb-5'>
             <div className='flex xl:flex-row xl:justify-between w-full md:flex-col md:gap-10 flex-col gap-10'>
                 <div className='p-3 bg-white rounded-lg shadow-lg'>
                     <div className='bg-white flex flex-row items-center gap-5 p-5'>
@@ -64,7 +57,7 @@ function Coinpage(props) {
                             <span className='text-black-900 hlval'>{coin.market_data.total_volume['usd']} </span>USD
                         </span>
                     </div> : <span>Loading...</span>}
-                    <Coingraph id={props?.id?props.id:"bitcoin"}/>
+                    <Coingraph id={props?.id}/>
                 </div>
                 <div className='bg-white p-2 rounded-lg shadow-lg'>
                     <MarketCap />
@@ -72,7 +65,7 @@ function Coinpage(props) {
             </div>
             <div className='flex flex-col gap-10 w-full xl:flex-row xl:justify-between md:flex-row md:justify-between'>
             <div className='w-full overflow-scroll shadow-lg rounded-lg bg-white xl:w-[45%] xl:h-[350px] md:w-[45%] md:h-[400px] coindet'>
-                <CoinDetails id={props?.id?props.id:"bitcoin"}/>
+                <CoinDetails id={props?.id}/>
             </div>
             <div className='w-full h-[400px] overflow-scroll rounded-lg shadow-lg newsDiv flex flex-col items-center xl:w-[48%] xl:h-[350px] md:w-[45%] md:h-[400px]'>
                 <Newsfeed/>

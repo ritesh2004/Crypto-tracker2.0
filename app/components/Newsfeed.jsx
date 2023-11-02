@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { NewsFeed } from '../Config/Apis';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { NewsData } from '../api/NewsData';
 
 function Newsfeed() {
   const route = useRouter();
@@ -11,22 +9,16 @@ function Newsfeed() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(NewsFeed());
-        if (res.ok) {
-          const news = await res.json();
-          // console.log(news.Data)
-          setNews(news.Data)
-        } else {
-          console.log("Failed to fetch data from CryptoCompare API")
-        }
+        const data = await NewsData();
+        setNews(data?.Data)
       } catch (error) {
-        alert("Error while fetching data", error)
+        console.error("Error while fetching data: ", error)
       }
     }
 
     return () => fetchData()
   }, [])
-  console.log(news)
+  // console.log(news)
   return (
     <div className='w-full bg-white text-black-900 flex flex-col gap-4 p-4'>
       <span style={{ fontFamily: 'Oxygen', color: 'black', fontWeight: '700', fontSize: '1.5rem' }}><i class="bi bi-square-fill" style={{ color: 'blueviolet' }}></i> NewsFeed</span>

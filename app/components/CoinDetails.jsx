@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { SingleCoin } from '../Config/Apis';
 import Linkify from "linkify-react";
 import Link from 'next/link';
+import {Singlecoin} from '../api/SingleCoin';
 
 function CoinDetails(props) {
   const [coin, setCoin] = useState();
+  const {id} = props
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(SingleCoin(props?.id?props.id:"bitcoin"));
-        if (res.ok) {
-          const data = await res.json()
-          setCoin(data)
-        }
-        else {
-          console.log("Failed to fetch data from CoinGecko API")
-        }
+        // console.log(id)
+        const data = await Singlecoin(id?id:"bitcoin")
+        // console.log(data)
+        setCoin(data)
       } catch (error) {
-        alert("Error while fetching data", error)
+        console.log("Error while fetching data", error)
       }
     }
 
-    return () => fetchData()
-  }, [props])
-
+    fetchData()
+  }, [id])
+  // console.log(coin)
   const options = {
     render: {
       url: ({ attributes, content }) => {
@@ -47,9 +44,9 @@ function CoinDetails(props) {
         <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Market Cap Rank <span className='text-green-600'>{coin.market_cap_rank}</span></span>
 
         <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Price Change 24h <span className='text-gray-500'>{coin.market_data.price_change_24h} USD</span></span>
-        <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Sentiment Votes Up Percentage <span style={{color:'#01C0AA'}}><i class="bi bi-arrow-up"></i>{coin.sentiment_votes_up_percentage}%</span></span>
+        <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Sentiment Votes Up Percentage <span style={{color:'#01C0AA'}}><i className="bi bi-arrow-up"></i>{coin.sentiment_votes_up_percentage}%</span></span>
 
-        <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Sentiment Votes Down Percentage <span style={{color:'#EE2E6B'}}><i class="bi bi-arrow-down"></i>{coin.sentiment_votes_down_percentage}%</span></span>
+        <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Sentiment Votes Down Percentage <span style={{color:'#EE2E6B'}}><i className="bi bi-arrow-down"></i>{coin.sentiment_votes_down_percentage}%</span></span>
 
         <span style={{fontFamily:'Oxygen',color:'black',fontWeight:'400',fontSize:'1.125rem'}}>Coin Link <a style={{textDecoration:'none',color:'violet'}} href={coin.links.homepage[0]}>Click Here</a></span>
       </div> : <span>Loading...</span>}
