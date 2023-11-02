@@ -9,8 +9,7 @@ function Cards() {
     // console.log(coinArr)
     const items = coinArr?.filter((coin,id)=>(id<=5)).map((coin,id) => {
         return (
-            <Card id={coin.id} key={id} />
-            // <Card id={coin?.id} />
+            <Card id={coin?.id} key={id} />
         )
     })
     // console.log(coinArr)
