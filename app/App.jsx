@@ -11,7 +11,7 @@ import PageWrapper from './components/PageWrapper'
 
 const App = async () => {
   const { id, searched } = useContext(Appcontext);
-  await Wait(500);
+  await Wait(5000);
   return (
     <div className='bg-[#F3F6FE] min-h-screen '>
       <div className='mb-3'>

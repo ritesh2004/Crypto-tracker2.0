@@ -5,8 +5,8 @@ import Image from 'next/image'
 function loading() {
   return (
     <div className='w-full h-screen flex justify-center items-center'>
-      <figure className='flex justify-center object-cover bg-cover h-[10rem] w-[60rem]'>
-        <Image src="/Images/animated_loader.gif" height={200} width={200} alt='gif' />
+      <figure className='flex justify-center object-cover bg-cover h-[10rem] w-[40rem]'>
+        <Image src="/Images/Dual_Ball.gif" height={100} width={150} alt='gif' />
       </figure>
     </div>
   )

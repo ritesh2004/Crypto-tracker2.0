@@ -33,7 +33,7 @@ function Coinpage(props) {
                     <div className='bg-white flex flex-row items-center gap-5 p-5'>
                         {coin ? <Image src={coin.image.large} height={40} width={40} /> : <div className='w-full h-full flex justify-center items-center'>
                 <figure className='flex justify-center h-[2rem] w-[2rem] object-cover bg-cover'>
-                    <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif'/>
+                    <Image src="/Images/Spinner.gif" height={100} width={100} alt='gif'/>
                 </figure>
             </div>}
                         <span className='coinName'>
@@ -62,7 +62,7 @@ function Coinpage(props) {
                         </span>
                     </div> : <div className='w-full h-full flex justify-center items-center'>
                         <figure className='flex justify-center h-[3rem] w-[3rem] object-cover bg-cover'>
-                            <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif' />
+                            <Image src="/Images/Spinner.gif" height={100} width={100} alt='gif' />
                         </figure>
                     </div>}
                     <Coingraph id={props?.id} />

@@ -94,7 +94,7 @@ const Card = async (props) => {
             />: 
             <div className='w-full h-full flex justify-center items-center'>
                 <figure className='flex justify-center h-[3rem] w-[3rem] object-cover bg-cover'>
-                    <Image src="/Images/CircularLoading.gif" height={100} width={100} alt='gif'/>
+                    <Image src="/Images/Spinner.gif" height={100} width={100} alt='gif'/>
                 </figure>
             </div>}
         </div>
