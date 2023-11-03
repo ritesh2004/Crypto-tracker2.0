@@ -23,6 +23,7 @@ export const Coinlist = async (currency) => {
         per_page: 100,
         page: 1,
         sparkline: false,
+        x_cg_demo_api_key: process.env.DEMO_COINGECKO_API_KEY
       },
     });
 

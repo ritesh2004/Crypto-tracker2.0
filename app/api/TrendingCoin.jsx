@@ -24,6 +24,7 @@ export const TrendingCoin = async (currency) => {
         page: 1,
         sparkline: false,
         price_change_percentage:'24h',
+        x_cg_demo_api_key: process.env.DEMO_COINGECKO_API_KEY
       },
     });
 

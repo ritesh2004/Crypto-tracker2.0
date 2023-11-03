@@ -16,7 +16,11 @@ export const Singlecoin = async (id) => {
   }
 
   try {
-    const { data } = await axios.get(`${COINGECKO_API_URL}/coins/${id}`);
+    const { data } = await axios.get(`${COINGECKO_API_URL}/coins/${id}`,{
+      params:{
+        x_cg_demo_api_key: process.env.DEMO_COINGECKO_API_KEY
+      }
+    });
 
     // Update rate limiting variables
     requestsThisMinute++;

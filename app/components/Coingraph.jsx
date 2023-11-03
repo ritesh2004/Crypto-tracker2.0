@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import './Coingraph.css'
 import { Ohlc } from "../api/Ohlc";
 import Image from "next/image";
+import PageWrapper from "./PageWrapper";
 
 const DynamicPlot = dynamic(() => import('react-plotly.js'), {
   ssr: false, // This ensures Plotly is only loaded on the client side

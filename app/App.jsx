@@ -7,6 +7,7 @@ import Result from './components/Result'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Wait from './components/Wait'
+import PageWrapper from './components/PageWrapper'
 
 const App = async () => {
   const { id, searched } = useContext(Appcontext);
@@ -16,6 +17,7 @@ const App = async () => {
       <div className='mb-3'>
         <Navbar />
       </div>
+      {/* <PageWrapper> */}
       <div className='flex flex-col items-center justify-center relative'>
         <Cards />
         <Coinpage id={id} />
@@ -23,6 +25,7 @@ const App = async () => {
           {searched ? <Result /> : <span></span>}
         </div>
       </div>
+      {/* </PageWrapper> */}
         <Footer/>
     </div>
   )

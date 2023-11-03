@@ -20,6 +20,7 @@
     "chart.js": "^4.4.0",
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.4",
+    "framer-motion": "^10.16.4",
     "linkify-html": "^4.1.1",
     "linkify-react": "^4.1.1",
     "linkifyjs": "^4.1.1",

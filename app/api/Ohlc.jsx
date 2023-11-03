@@ -19,7 +19,8 @@ export const Ohlc = async (id,currency,days) => {
     const { data } = await axios.get(`${COINGECKO_API_URL}/coins/${id}/ohlc`, {
       params: {
         vs_currency: currency,
-        days:days
+        days:days,
+        x_cg_demo_api_key: process.env.DEMO_COINGECKO_API_KEY
       },
     });
 
