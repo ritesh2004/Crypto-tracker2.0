@@ -18,7 +18,7 @@ function Newsfeed() {
 
     return () => fetchData()
   }, [])
-  // console.log(news)
+  console.log(news)
   return (
     <div className='w-full bg-white text-black-900 flex flex-col gap-4 p-4'>
       <span style={{ fontFamily: 'Oxygen', color: 'black', fontWeight: '700', fontSize: '1.5rem' }}><i class="bi bi-square-fill" style={{ color: 'blueviolet' }}></i> NewsFeed</span>
